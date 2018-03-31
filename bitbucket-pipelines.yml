@@ -1,0 +1,23 @@
+image: node:9
+clone:
+  depth: full
+pipelines:
+  branches:
+      master:
+          - step:
+              name: test
+              script:
+                - npm test
+          - step:
+              name: deploy
+              script:
+                - git push -f -q https://heroku:$HEROKU_API_KEY@git.heroku.com/react-node-fullstack-boilerplate.git HEAD
+      develop:
+          - step:
+              name: test
+              script:
+                - npm test
+          - step:
+              name: deploy
+              script:
+                 - git push -f -q https://heroku:$HEROKU_API_KEY@git.heroku.com/react-node-fullstack-boilerplate.git HEAD
